@@ -1,3 +1,4 @@
+import TypeReveal from "@/components/animations/TypeReveal";
 import {
   bodyClass,
   eyebrowClass,
@@ -79,7 +80,7 @@ export default function SignaturePresencePage() {
         <div className="mx-auto w-full max-w-5xl">
           <p className={eyebrowClass}>Flagship Program</p>
           <h1 className="mt-4 text-4xl tracking-tighter text-neutral-900 sm:text-5xl md:text-6xl lg:text-7xl dark:text-white">
-            Signature Presence
+            <TypeReveal text="Signature Presence" />
           </h1>
           <p
             className={`mt-6 max-w-3xl text-base leading-relaxed md:text-xl ${bodyClass}`}

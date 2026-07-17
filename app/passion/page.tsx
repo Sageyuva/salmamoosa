@@ -1,4 +1,6 @@
 import Image from "next/image";
+import MaskReveal from "@/components/animations/MaskReveal";
+import TypeReveal from "@/components/animations/TypeReveal";
 import {
   bodyClass,
   eyebrowClass,
@@ -21,10 +23,14 @@ export default function PassionPage() {
           <div>
             <p className={eyebrowClass}>Community Movement</p>
             <h1 className="mt-4 text-4xl tracking-tighter text-neutral-900 sm:text-5xl md:text-6xl dark:text-white">
-              The Next Curve
+              <TypeReveal text="The Next Curve" />
             </h1>
             <p className="mt-4 text-lg tracking-tight text-neutral-500 md:text-xl dark:text-neutral-400">
-              Growing Older. Living Better. Becoming More.
+              <TypeReveal
+                text="Growing Older. Living Better. Becoming More."
+                delay={0.75}
+                charDuration={0.028}
+              />
             </p>
             <p
               className={`mt-8 max-w-xl text-base leading-relaxed md:text-lg ${bodyClass}`}
@@ -37,15 +43,20 @@ export default function PassionPage() {
           </div>
 
           <div className="relative mx-auto w-full max-w-md md:mx-0 md:justify-self-end">
-            <div className="animate-pulse-slow relative overflow-hidden rounded-3xl border border-black/[0.06] bg-white shadow-[0_12px_40px_rgba(0,0,0,0.06)] dark:border-white/[0.08] dark:shadow-2xl">
-              <Image
-                src="/images/nextcurve.png"
-                alt="The Next Curve — Growing Older. Living Better. Becoming More."
-                width={800}
-                height={800}
-                priority
-                className="h-auto w-full object-contain p-6 md:p-8"
-              />
+            <div className="animate-pulse-slow">
+              <MaskReveal
+                scroll
+                className="relative overflow-hidden rounded-3xl border border-black/[0.06] bg-white shadow-[0_12px_40px_rgba(0,0,0,0.06)] dark:border-white/[0.08] dark:shadow-2xl"
+              >
+                <Image
+                  src="/images/nextcurve.png"
+                  alt="The Next Curve — Growing Older. Living Better. Becoming More."
+                  width={800}
+                  height={800}
+                  priority
+                  className="h-auto w-full object-contain p-6 md:p-8"
+                />
+              </MaskReveal>
             </div>
           </div>
         </div>

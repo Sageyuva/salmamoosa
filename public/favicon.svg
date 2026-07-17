@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Salma Moosa">
+  <rect width="512" height="512" fill="#0a0a0c"/>
+  <circle cx="256" cy="256" r="196" fill="#5b2a7a"/>
+  <text
+    x="256"
+    y="256"
+    fill="#ffffff"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="280"
+    font-weight="700"
+    text-anchor="middle"
+    dominant-baseline="central"
+  >S</text>
+</svg>

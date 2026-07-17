@@ -8,6 +8,7 @@ import {
   testimonialTabs,
   type TestimonialCategory,
 } from "@/lib/testimonials";
+import TypeReveal from "@/components/animations/TypeReveal";
 import {
   bodyClass,
   eyebrowClass,
@@ -82,7 +83,7 @@ export default function InsightsTabs() {
         <div className="mx-auto w-full max-w-5xl">
           <p className={eyebrowClass}>Insights</p>
           <h1 className="mt-4 text-4xl tracking-tighter text-neutral-900 sm:text-5xl md:text-6xl dark:text-white">
-            Insights
+            <TypeReveal text="Insights" />
           </h1>
 
           <div

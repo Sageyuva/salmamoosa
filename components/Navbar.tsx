@@ -6,6 +6,7 @@ import { Great_Vibes } from "next/font/google";
 import { Menu, X } from "lucide-react";
 import { FaLinkedin, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
 import ThemeToggle from "@/components/ThemeToggle";
+import TypeReveal from "@/components/animations/TypeReveal";
 
 const signature = Great_Vibes({
   weight: "400",
@@ -42,7 +43,7 @@ export default function Navbar() {
           href="/"
           className={`${signature.className} inline-flex h-full min-w-max shrink-0 items-center whitespace-nowrap text-xl font-medium tracking-wide text-[#1d1d1f] select-none transition-opacity hover:opacity-70 dark:text-white/95 dark:hover:opacity-80`}
         >
-          Salma Moosa
+          <TypeReveal text="Salma Moosa" charDuration={0.045} delay={0.05} />
         </Link>
 
         <div className="flex shrink-0 items-center gap-3 sm:gap-4">

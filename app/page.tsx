@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import CountUp from "@/components/animations/CountUp";
+import MaskReveal from "@/components/animations/MaskReveal";
+import TypeReveal from "@/components/animations/TypeReveal";
 import {
   bodyClass,
   chip,
@@ -81,7 +84,7 @@ export default function Home() {
       <section className="relative px-6 pb-24 pt-20 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row md:items-center md:gap-14">
           <div className="order-1 shrink-0 md:order-2">
-            <div className="relative mx-auto size-44 overflow-hidden rounded-full bg-black/[0.04] shadow-[0_12px_40px_rgba(0,0,0,0.12)] ring-1 ring-black/10 sm:size-52 md:size-56 lg:size-60 dark:bg-white/5 dark:shadow-[0_12px_40px_rgba(0,0,0,0.45)] dark:ring-white/15">
+            <MaskReveal className="relative mx-auto size-44 overflow-hidden rounded-full bg-black/[0.04] shadow-[0_12px_40px_rgba(0,0,0,0.12)] ring-1 ring-black/10 sm:size-52 md:size-56 lg:size-60 dark:bg-white/5 dark:shadow-[0_12px_40px_rgba(0,0,0,0.45)] dark:ring-white/15">
               <Image
                 src="/images/hero.png"
                 alt="Salma Moosa"
@@ -90,16 +93,22 @@ export default function Home() {
                 priority
                 className="object-cover object-[50%_18%]"
               />
-            </div>
+            </MaskReveal>
           </div>
 
           <div className="order-2 w-full min-w-0 flex-1 text-center md:order-1 md:text-left">
             <h1 className="text-[1.85rem] font-semibold leading-[1.12] tracking-tighter text-neutral-900 sm:text-4xl md:text-[2.75rem] lg:text-5xl dark:text-white">
-              Building Businesses.
-              <br className="hidden sm:block" />{" "}
-              Mentoring Founders.
-              <br className="hidden sm:block" />{" "}
-              Empowering Possibilities.
+              <TypeReveal text="Building Businesses." className="block" />
+              <TypeReveal
+                text="Mentoring Founders."
+                className="mt-[0.12em] block"
+                delay={0.85}
+              />
+              <TypeReveal
+                text="Empowering Possibilities."
+                className="mt-[0.12em] block"
+                delay={1.55}
+              />
             </h1>
             <p
               className={`mx-auto mt-6 max-w-lg text-base leading-relaxed md:mx-0 md:mt-7 md:text-lg ${bodyClass}`}
@@ -131,9 +140,10 @@ export default function Home() {
             {impactCards.map((card) => (
               <div key={card.stat} className={glassCard}>
                 <SpecularGloss />
-                <span className="relative text-3xl font-semibold tracking-tighter text-neutral-900 md:text-4xl dark:text-white">
-                  {card.stat}
-                </span>
+                <CountUp
+                  value={card.stat}
+                  className="relative text-3xl font-semibold tracking-tighter text-neutral-900 md:text-4xl dark:text-white"
+                />
                 <p
                   className={`relative mt-4 text-sm leading-snug md:text-base ${bodyClass}`}
                 >
