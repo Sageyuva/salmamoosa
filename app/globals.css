@@ -1,8 +1,30 @@
 @import "tailwindcss";
 
+/* Class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  --background: #f5f5f7;
+  --foreground: #737373; /* neutral-500 */
+  --heading: #171717; /* neutral-900 */
+  --muted: #737373;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  --nav-bg: rgba(255, 255, 255, 0.8);
+  --nav-border: rgba(0, 0, 0, 0.08);
+}
+
+.dark {
   --background: #0a0a0c;
-  --foreground: #a3a3a3;
+  --foreground: #a3a3a3; /* neutral-400 */
+  --heading: #ffffff;
+  --muted: #a3a3a3;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: none;
+  --nav-bg: rgba(255, 255, 255, 0.05);
+  --nav-border: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
@@ -14,21 +36,74 @@
 
 body {
   min-height: 100vh;
+  background-color: #f5f5f7;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 20% 10%, #ffffff 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 80% 90%, #ffffff 0%, transparent 50%),
+    linear-gradient(to bottom, #f5f5f7, #ffffff, #f5f5f7);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+html.dark body {
   background-color: #0a0a0c;
   background-image:
     radial-gradient(ellipse 80% 60% at 20% 10%, #121214 0%, transparent 55%),
     radial-gradient(ellipse 70% 50% at 80% 90%, #121214 0%, transparent 50%),
     linear-gradient(to bottom, #0a0a0c, #121214, #0a0a0c);
-  background-attachment: fixed;
-  color: var(--foreground);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Typography adaptability */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  @apply tracking-tighter font-semibold text-white;
+  @apply tracking-tighter font-semibold text-neutral-900 dark:text-white;
+}
+
+p,
+li,
+label,
+small,
+address {
+  @apply text-neutral-500 dark:text-neutral-400;
+}
+
+/* High-contrast frosted glass profiles */
+.glass-surface {
+  @apply relative overflow-hidden rounded-3xl border border-black/[0.06] bg-white/75 text-[#1d1d1f] shadow-[0_12px_40px_rgba(0,0,0,0.06)] backdrop-blur-2xl transition-all duration-300 dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-white dark:shadow-none dark:backdrop-blur-lg;
+}
+
+.glass-surface:hover {
+  @apply bg-white/85 dark:border-white/[0.14] dark:bg-white/[0.06];
+}
+
+.fluid-glass {
+  @apply relative overflow-hidden rounded-[2rem] border border-black/[0.06] bg-white/75 text-[#1d1d1f] shadow-[0_12px_40px_rgba(0,0,0,0.06)] backdrop-blur-2xl transition-all duration-300 dark:border-white/[0.12] dark:bg-white/[0.05] dark:text-white dark:shadow-[0_8px_40px_rgba(0,0,0,0.35)];
+}
+
+.specular-gloss {
+  @apply pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-tr from-transparent via-black/[0.03] to-transparent dark:via-white/[0.06];
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.92;
+    transform: scale(1.01);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
 }

@@ -1,5 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  bodyClass,
+  chip,
+  eyebrowClass,
+  fluidGlassHero,
+  glassCard,
+  liquidButton,
+  specularGloss,
+} from "@/lib/ui";
 
 const impactCards = [
   {
@@ -61,22 +70,8 @@ const industries = [
   },
 ] as const;
 
-const fluidGlass =
-  "relative overflow-hidden backdrop-blur-2xl bg-white/[0.05] border border-white/[0.12] rounded-[2.5rem] shadow-[0_8px_40px_rgba(0,0,0,0.35)]";
-
-const glassCard =
-  "relative flex h-full min-h-[180px] flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur-lg transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:border-white/[0.14] hover:bg-white/[0.06] md:p-8";
-
-const liquidButton =
-  "inline-flex items-center justify-center rounded-full border border-white/[0.2] bg-white/[0.08] px-6 py-3 font-medium text-white backdrop-blur-md transition-all duration-300 hover:bg-white/[0.15] shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]";
-
 function SpecularGloss() {
-  return (
-    <span
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-tr from-transparent via-white/[0.06] to-transparent"
-    />
-  );
+  return <span aria-hidden="true" className={specularGloss} />;
 }
 
 export default function Home() {
@@ -86,7 +81,7 @@ export default function Home() {
       <section className="relative px-6 pb-24 pt-20 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row md:items-center md:gap-14">
           <div className="order-1 shrink-0 md:order-2">
-            <div className="relative mx-auto size-44 overflow-hidden rounded-full bg-white/5 shadow-[0_12px_40px_rgba(0,0,0,0.45)] ring-1 ring-white/15 sm:size-52 md:size-56 lg:size-60">
+            <div className="relative mx-auto size-44 overflow-hidden rounded-full bg-black/[0.04] shadow-[0_12px_40px_rgba(0,0,0,0.12)] ring-1 ring-black/10 sm:size-52 md:size-56 lg:size-60 dark:bg-white/5 dark:shadow-[0_12px_40px_rgba(0,0,0,0.45)] dark:ring-white/15">
               <Image
                 src="/images/hero.png"
                 alt="Salma Moosa"
@@ -99,14 +94,16 @@ export default function Home() {
           </div>
 
           <div className="order-2 w-full min-w-0 flex-1 text-center md:order-1 md:text-left">
-            <h1 className="text-[1.85rem] font-semibold leading-[1.12] tracking-tighter text-white sm:text-4xl md:text-[2.75rem] lg:text-5xl">
+            <h1 className="text-[1.85rem] font-semibold leading-[1.12] tracking-tighter text-neutral-900 sm:text-4xl md:text-[2.75rem] lg:text-5xl dark:text-white">
               Building Businesses.
               <br className="hidden sm:block" />{" "}
               Mentoring Founders.
               <br className="hidden sm:block" />{" "}
               Empowering Possibilities.
             </h1>
-            <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-neutral-400 md:mx-0 md:mt-7 md:text-lg">
+            <p
+              className={`mx-auto mt-6 max-w-lg text-base leading-relaxed md:mx-0 md:mt-7 md:text-lg ${bodyClass}`}
+            >
               Welcome to the world of Salma Moosa, where entrepreneurship meets
               empathy, structure meets scale, and clarity meets execution. Three
               decades of transforming businesses and mentoring thousands of
@@ -120,13 +117,11 @@ export default function Home() {
       <section className="relative px-6 pb-24 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-5xl">
           <div className="mb-10 md:mb-12">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">
-              Track Record
-            </p>
-            <h2 className="mt-3 text-3xl tracking-tighter text-white md:text-4xl">
+            <p className={eyebrowClass}>Track Record</p>
+            <h2 className="mt-3 text-3xl tracking-tighter text-neutral-900 md:text-4xl dark:text-white">
               Impact Highlights
             </h2>
-            <p className="mt-3 max-w-xl text-base text-neutral-400 md:text-lg">
+            <p className={`mt-3 max-w-xl text-base md:text-lg ${bodyClass}`}>
               Three decades of measurable outcomes across communities, founders,
               and capital.
             </p>
@@ -136,10 +131,12 @@ export default function Home() {
             {impactCards.map((card) => (
               <div key={card.stat} className={glassCard}>
                 <SpecularGloss />
-                <span className="relative text-3xl font-semibold tracking-tighter text-white md:text-4xl">
+                <span className="relative text-3xl font-semibold tracking-tighter text-neutral-900 md:text-4xl dark:text-white">
                   {card.stat}
                 </span>
-                <p className="relative mt-4 text-sm leading-snug text-neutral-400 md:text-base">
+                <p
+                  className={`relative mt-4 text-sm leading-snug md:text-base ${bodyClass}`}
+                >
                   {card.label}
                 </p>
               </div>
@@ -152,20 +149,18 @@ export default function Home() {
       <section className="relative px-6 pb-16 md:px-12 lg:px-20">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">
-              Expertise
-            </p>
-            <h2 className="mt-3 text-3xl tracking-tighter text-white md:text-4xl">
+            <p className={eyebrowClass}>Expertise</p>
+            <h2 className="mt-3 text-3xl tracking-tighter text-neutral-900 md:text-4xl dark:text-white">
               Services
             </h2>
-            <p className="mt-3 max-w-xl text-base text-neutral-400 md:text-lg">
+            <p className={`mt-3 max-w-xl text-base md:text-lg ${bodyClass}`}>
               Strategic interventions, founder mentoring, and growth systems
               built for real outcomes.
             </p>
           </div>
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm font-medium tracking-tight text-white transition-opacity hover:opacity-70"
+            className="inline-flex items-center gap-2 text-sm font-medium tracking-tight text-neutral-900 transition-opacity hover:opacity-70 dark:text-white"
           >
             Explore Services
             <span aria-hidden="true">→</span>
@@ -176,10 +171,12 @@ export default function Home() {
       {/* Industries */}
       <section className="relative px-6 pb-24 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-5xl">
-          <h2 className="text-3xl tracking-tighter text-white md:text-4xl">
+          <h2 className="text-3xl tracking-tighter text-neutral-900 md:text-4xl dark:text-white">
             Industries
           </h2>
-          <p className="mt-3 max-w-2xl text-base tracking-tight text-neutral-400 md:text-lg">
+          <p
+            className={`mt-3 max-w-2xl text-base tracking-tight md:text-lg ${bodyClass}`}
+          >
             Shaping the future with an active footprint across Indian and global
             ecosystems.
           </p>
@@ -188,10 +185,12 @@ export default function Home() {
             {industries.map((industry) => (
               <div key={industry.title} className={glassCard}>
                 <SpecularGloss />
-                <h3 className="relative text-lg font-semibold tracking-tight text-white md:text-xl">
+                <h3 className="relative text-lg font-semibold tracking-tight text-neutral-900 md:text-xl dark:text-white">
                   {industry.title}
                 </h3>
-                <p className="relative mt-4 text-sm leading-relaxed text-neutral-400 md:text-base">
+                <p
+                  className={`relative mt-4 text-sm leading-relaxed md:text-base ${bodyClass}`}
+                >
                   {industry.description}
                 </p>
               </div>
@@ -202,19 +201,21 @@ export default function Home() {
 
       {/* Fat2Fit — Product Announcement */}
       <section className="relative px-6 pb-28 md:px-12 lg:px-20">
-        <div className={`mx-auto w-full max-w-5xl ${fluidGlass}`}>
+        <div className={`mx-auto w-full max-w-5xl ${fluidGlassHero}`}>
           <SpecularGloss />
           <div className="relative grid grid-cols-1 items-center gap-12 p-8 md:p-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white/80 backdrop-blur-md">
+              <span className={`inline-flex items-center ${chip}`}>
                 Now Live
               </span>
 
-              <h2 className="mt-6 text-3xl leading-tight tracking-tighter text-white md:text-4xl">
+              <h2 className="mt-6 text-3xl leading-tight tracking-tighter text-neutral-900 md:text-4xl dark:text-white">
                 Fat2Fit — An Invitation to a Real Journey of Transformation
               </h2>
 
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-neutral-400 md:text-lg">
+              <p
+                className={`mt-6 max-w-2xl text-base leading-relaxed md:text-lg ${bodyClass}`}
+              >
                 Born from five years of lived experience, setbacks, resilience,
                 and quiet consistency, Fat2Fit shares an honest, no-formula
                 approach to health that goes far beyond weight loss. If you’ve
@@ -223,9 +224,9 @@ export default function Home() {
                 where you are.
               </p>
 
-              <div className="relative mt-8 overflow-hidden rounded-2xl border border-teal-400/20 bg-teal-500/[0.08] p-5 backdrop-blur-md md:p-6">
+              <div className="relative mt-8 overflow-hidden rounded-2xl border border-teal-600/20 bg-teal-500/10 p-5 backdrop-blur-md md:p-6 dark:border-teal-400/20 dark:bg-teal-500/[0.08]">
                 <SpecularGloss />
-                <p className="relative text-sm leading-relaxed text-teal-100/90 md:text-base">
+                <p className="relative text-sm leading-relaxed text-teal-900/90 md:text-base dark:text-teal-100/90">
                   We have partnered with Mind Empowered (Kochi). A portion of the
                   Author’s Royalty from every book purchase will be contributed
                   to support women and children&apos;s mental health and
@@ -245,7 +246,7 @@ export default function Home() {
 
             <div className="lg:col-span-5">
               <div className="group relative mx-auto w-full max-w-sm">
-                <div className="relative transform overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+                <div className="relative transform overflow-hidden rounded-2xl border border-black/10 shadow-2xl transition-transform duration-500 hover:scale-[1.02] dark:border-white/10">
                   <Image
                     src="/images/book.png"
                     alt="Fat2Fit by Salma Moosa — Available Now on Notion Press and Amazon"

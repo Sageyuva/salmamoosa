@@ -1,3 +1,13 @@
+import Link from "next/link";
+import {
+  eyebrowClass,
+  fluidGlass,
+  glassCardSimple,
+  liquidButton,
+  pillarTag,
+  specularGloss,
+} from "@/lib/ui";
+
 const workshops = [
   {
     title: "Strategic Interventions",
@@ -20,31 +30,26 @@ const workshops = [
 ] as const;
 
 const pillars = [
-  "Twelve 77 Ventures",
-  "Signature Presence — Leader & Founder Profile Building",
-  "Growth Mentors — Business Mentoring for Accelerated Growth",
-  "Fractional CMO & Deep Tech Expert — Driving Revenues & IP Commercialisation",
+  { label: "Twelve 77 Ventures", href: null },
+  {
+    label: "Signature Presence — Leader & Founder Profile Building",
+    href: "/signature-presence",
+  },
+  {
+    label: "Growth Mentors — Business Mentoring for Accelerated Growth",
+    href: null,
+  },
+  {
+    label:
+      "Fractional CMO & Deep Tech Expert — Driving Revenues & IP Commercialisation",
+    href: null,
+  },
 ] as const;
 
-const glassCard =
-  "group relative overflow-hidden backdrop-blur-lg bg-white/[0.03] border border-white/[0.08] rounded-3xl p-6 md:p-8 transition-all duration-300 hover:bg-white/[0.06] hover:border-white/[0.14] hover:scale-[1.02] hover:-translate-y-1";
-
-const fluidGlass =
-  "relative overflow-hidden backdrop-blur-2xl bg-white/[0.05] border border-white/[0.12] rounded-[2rem] p-8 md:p-12 shadow-[0_8px_40px_rgba(0,0,0,0.35)]";
-
-const liquidButton =
-  "inline-flex items-center justify-center rounded-full border border-white/[0.2] bg-white/[0.08] px-8 py-3 text-sm font-medium tracking-tight text-white backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.15] active:scale-[0.98] shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]";
-
-const pillarTag =
-  "backdrop-blur-md bg-white/[0.04] border border-white/[0.08] px-6 py-3 rounded-full text-sm text-neutral-300 font-medium transition-all duration-300 hover:border-white/[0.16] hover:bg-white/[0.07] hover:text-white";
+const glassCard = `${glassCardSimple} group hover:-translate-y-1 hover:scale-[1.02]`;
 
 function SpecularGloss() {
-  return (
-    <span
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-tr from-transparent via-white/[0.06] to-transparent"
-    />
-  );
+  return <span aria-hidden="true" className={specularGloss} />;
 }
 
 export default function ServicesPage() {
@@ -53,10 +58,8 @@ export default function ServicesPage() {
       {/* Philosophy */}
       <section className="relative px-6 pb-16 pt-20 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-5xl">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">
-            Services
-          </p>
-          <h1 className="mt-4 max-w-4xl text-3xl font-medium tracking-tight text-white md:text-5xl">
+          <p className={eyebrowClass}>Services</p>
+          <h1 className="mt-4 max-w-4xl text-3xl font-medium tracking-tight text-neutral-900 md:text-5xl dark:text-white">
             Built on Decades of Experience, Deep Empathy for the Founder Journey
             &amp; a Mission to Simplify Success, Rooted in Action, Clarity &amp;
             Real Outcomes.
@@ -67,7 +70,7 @@ export default function ServicesPage() {
       {/* Interactive Workshops */}
       <section className="relative px-6 pb-16 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-5xl">
-          <h2 className="text-xl tracking-tighter text-white md:text-2xl">
+          <h2 className="text-xl tracking-tighter text-neutral-900 md:text-2xl dark:text-white">
             Interactive Workshops
           </h2>
 
@@ -75,18 +78,18 @@ export default function ServicesPage() {
             {workshops.map((workshop) => (
               <div key={workshop.title} className={glassCard}>
                 <SpecularGloss />
-                <h3 className="relative text-lg font-semibold tracking-tight text-white md:text-xl">
+                <h3 className="relative text-lg font-semibold tracking-tight text-neutral-900 md:text-xl dark:text-white">
                   {workshop.title}
                 </h3>
                 <ul className="relative mt-6 space-y-3">
                   {workshop.items.map((item) => (
                     <li
                       key={item}
-                      className="flex gap-3 text-sm leading-snug text-neutral-400 md:text-base"
+                      className="flex gap-3 text-sm leading-snug text-neutral-500 md:text-base dark:text-neutral-400"
                     >
                       <span
                         aria-hidden="true"
-                        className="mt-2 size-1.5 shrink-0 rounded-full bg-white/40"
+                        className="mt-2 size-1.5 shrink-0 rounded-full bg-neutral-400 dark:bg-white/40"
                       />
                       {item}
                     </li>
@@ -101,15 +104,21 @@ export default function ServicesPage() {
       {/* Core Pillars */}
       <section className="relative px-6 pb-16 md:px-12 lg:px-20">
         <div className="mx-auto w-full max-w-5xl">
-          <h2 className="text-xl tracking-tighter text-white md:text-2xl">
+          <h2 className="text-xl tracking-tighter text-neutral-900 md:text-2xl dark:text-white">
             Core Pillars
           </h2>
           <div className="mt-8 flex flex-wrap gap-3">
-            {pillars.map((pillar) => (
-              <span key={pillar} className={pillarTag}>
-                {pillar}
-              </span>
-            ))}
+            {pillars.map((pillar) =>
+              pillar.href ? (
+                <Link key={pillar.label} href={pillar.href} className={pillarTag}>
+                  {pillar.label}
+                </Link>
+              ) : (
+                <span key={pillar.label} className={pillarTag}>
+                  {pillar.label}
+                </span>
+              ),
+            )}
           </div>
         </div>
       </section>
@@ -119,13 +128,13 @@ export default function ServicesPage() {
         <div className={`mx-auto w-full max-w-5xl ${fluidGlass}`}>
           <SpecularGloss />
           <div className="relative flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-            <h2 className="max-w-xl text-2xl leading-tight tracking-tighter text-white md:text-3xl">
+            <h2 className="max-w-xl text-2xl leading-tight tracking-tighter text-neutral-900 md:text-3xl dark:text-white">
               Let&apos;s talk about what fits your growth, as a leader or an
               organisation.
             </h2>
             <a
               href="mailto:salma@twelve77ventures.com"
-              className={liquidButton}
+              className={`${liquidButton} px-8 text-sm`}
             >
               Write to salma@twelve77ventures
             </a>
