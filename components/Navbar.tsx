@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/[0.08] bg-[#f5f5f7]/90 backdrop-blur-xl dark:border-white/10 dark:bg-[#0a0a0c]/85">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/[0.08] bg-white/55 backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.05]">
         <nav
           className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-6 px-6"
           aria-label="Primary"
@@ -88,13 +88,13 @@ export default function Navbar() {
       <div
         aria-hidden="true"
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-0 z-[60] bg-black/40 transition-opacity duration-300 md:hidden dark:bg-black/60 ${
+        className={`fixed inset-0 z-[60] bg-black/30 backdrop-blur-sm transition-opacity duration-300 md:hidden dark:bg-black/45 ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
 
       <div
-        className={`fixed inset-y-0 right-0 z-[70] flex w-[min(100%,20rem)] transform flex-col justify-between border-l border-black/[0.08] bg-[#f5f5f7] p-6 shadow-[-12px_0_40px_rgba(0,0,0,0.08)] transition-transform duration-300 md:hidden dark:border-white/[0.08] dark:bg-[#0a0a0c] dark:shadow-[-12px_0_40px_rgba(0,0,0,0.45)] ${
+        className={`fixed inset-y-0 right-0 z-[70] flex w-[min(100%,20rem)] transform flex-col justify-between border-l border-black/[0.08] bg-white/70 p-6 shadow-[-16px_0_48px_rgba(0,0,0,0.08)] backdrop-blur-2xl transition-transform duration-300 md:hidden dark:border-white/[0.08] dark:bg-white/[0.06] dark:shadow-[-16px_0_48px_rgba(0,0,0,0.4)] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
