@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Great_Vibes } from "next/font/google";
 import { Menu, X } from "lucide-react";
@@ -33,60 +33,68 @@ const socials = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-black/[0.08] bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-white/5">
-      <nav
-        className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-6 px-6"
-        aria-label="Primary"
-      >
-        <Link
-          href="/"
-          className={`${signature.className} inline-flex h-full min-w-max shrink-0 items-center whitespace-nowrap text-xl font-medium tracking-wide text-[#1d1d1f] select-none transition-opacity hover:opacity-70 dark:text-white/95 dark:hover:opacity-80`}
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/[0.08] bg-[#f5f5f7]/90 backdrop-blur-xl dark:border-white/10 dark:bg-[#0a0a0c]/85">
+        <nav
+          className="mx-auto flex h-12 max-w-5xl items-center justify-between gap-6 px-6"
+          aria-label="Primary"
         >
-          <TypeReveal text="Salma Moosa" charDuration={0.045} delay={0.05} />
-        </Link>
-
-        <div className="flex shrink-0 items-center gap-3 sm:gap-4">
-          {/* Desktop links */}
-          <div className="hidden items-center gap-3 sm:gap-5 md:flex">
-            {links.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="inline-flex items-center whitespace-nowrap text-sm font-medium tracking-tight text-[#1d1d1f]/70 transition-colors hover:text-[#1d1d1f] dark:text-white/70 dark:hover:text-white"
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
-
-          <ThemeToggle />
-
-          {/* Mobile menu trigger */}
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            aria-label="Open menu"
-            aria-expanded={isOpen}
-            className="flex cursor-pointer items-center text-[#1d1d1f] transition-opacity hover:opacity-70 md:hidden dark:text-white/90"
+          <Link
+            href="/"
+            className={`${signature.className} inline-flex h-full min-w-max shrink-0 items-center whitespace-nowrap text-xl font-medium tracking-wide text-[#1d1d1f] select-none transition-opacity hover:opacity-70 dark:text-white/95 dark:hover:opacity-80`}
           >
-            <Menu size={22} />
-          </button>
-        </div>
-      </nav>
+            <TypeReveal text="Salma Moosa" charDuration={0.045} delay={0.05} />
+          </Link>
 
-      {/* Backdrop */}
+          <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+            <div className="hidden items-center gap-3 sm:gap-5 md:flex">
+              {links.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="inline-flex items-center whitespace-nowrap text-sm font-medium tracking-tight text-[#1d1d1f]/70 transition-colors hover:text-[#1d1d1f] dark:text-white/70 dark:hover:text-white"
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
+
+            <ThemeToggle />
+
+            <button
+              type="button"
+              onClick={() => setIsOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={isOpen}
+              className="flex cursor-pointer items-center text-[#1d1d1f] transition-opacity hover:opacity-70 md:hidden dark:text-white/90"
+            >
+              <Menu size={22} />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Portal-style overlay — kept outside blurred header so fixed positioning works */}
       <div
         aria-hidden="true"
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-sm transition-opacity duration-300 md:hidden dark:bg-black/50 ${
+        className={`fixed inset-0 z-[60] bg-black/40 transition-opacity duration-300 md:hidden dark:bg-black/60 ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
 
-      {/* Mobile glass drawer */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 flex w-4/5 max-w-sm transform flex-col justify-between border-l border-black/[0.08] bg-[#f5f5f7]/95 p-6 backdrop-blur-2xl transition-transform duration-300 md:hidden dark:border-white/[0.08] dark:bg-[#0a0a0c]/90 ${
+        className={`fixed inset-y-0 right-0 z-[70] flex w-[min(100%,20rem)] transform flex-col justify-between border-l border-black/[0.08] bg-[#f5f5f7] p-6 shadow-[-12px_0_40px_rgba(0,0,0,0.08)] transition-transform duration-300 md:hidden dark:border-white/[0.08] dark:bg-[#0a0a0c] dark:shadow-[-12px_0_40px_rgba(0,0,0,0.45)] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -138,7 +146,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex size-10 items-center justify-center rounded-full border border-black/10 bg-black/[0.04] text-[#1d1d1f]/70 backdrop-blur-md transition-all duration-300 hover:bg-black/[0.08] hover:text-[#1d1d1f] dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:bg-white/[0.12] dark:hover:text-white dark:hover:shadow-[0_0_12px_rgba(255,255,255,0.25)]"
+                className="flex size-10 items-center justify-center rounded-full border border-black/10 bg-black/[0.04] text-[#1d1d1f]/70 transition-all duration-300 hover:bg-black/[0.08] hover:text-[#1d1d1f] dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:bg-white/[0.12] dark:hover:text-white"
               >
                 <Icon size={16} />
               </a>
@@ -146,6 +154,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
